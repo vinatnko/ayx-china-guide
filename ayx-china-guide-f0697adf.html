@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>爱游戏 · 平台介绍与导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #f8fbfd;
+            color: #1a2b3c;
+            line-height: 1.6;
+            padding: 0 0 3rem 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 1.5rem 1.2rem;
+            width: 100%;
+        }
+
+        /* hero banner */
+        .hero {
+            background: linear-gradient(145deg, #0f2d3a 0%, #1b4b5e 100%);
+            border-radius: 32px;
+            padding: 3rem 2.2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: 0 12px 28px rgba(0, 40, 50, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(80, 200, 190, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #e6f6fa;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #b3dfe8;
+            max-width: 620px;
+            position: relative;
+            z-index: 1;
+            border-left: 4px solid #40bfb0;
+            padding-left: 1.2rem;
+        }
+
+        /* 网格卡片布局 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 4px 14px rgba(20, 60, 70, 0.06);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(60, 180, 170, 0.18);
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(20, 90, 90, 0.08);
+            border-color: #40bfb0;
+            transform: translateY(-2px);
+        }
+
+        .card .emoji-icon {
+            font-size: 1.8rem;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f353f;
+            margin-bottom: 0.4rem;
+        }
+
+        .card p {
+            color: #2c4b57;
+            font-size: 0.98rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(64, 191, 176, 0.12);
+            color: #147a6e;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-top: 1rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 三段式介绍 - 背景说明 + 承接段落 */
+        .intro-block {
+            margin: 2.2rem 0 1.8rem;
+        }
+
+        .intro-block h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #0a2d36;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.3px;
+        }
+
+        .intro-block .lead {
+            font-size: 1.05rem;
+            color: #2e5b64;
+            border-bottom: 2px solid #b7dfda;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .story-paragraph {
+            background: #f4faf9;
+            border-radius: 20px;
+            padding: 1.6rem 1.8rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #3ab3a4;
+        }
+
+        .story-paragraph p {
+            margin-bottom: 0.6rem;
+        }
+
+        .story-paragraph p:last-child {
+            margin-bottom: 0;
+        }
+
+        .link-sentence {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem 1.8rem;
+            margin: 2rem 0 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #d6ebe8;
+        }
+
+        .link-sentence a {
+            color: #127a6b;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #40bfb0;
+            transition: border-color 0.2s;
+        }
+
+        .link-sentence a:hover {
+            border-bottom-color: #0d5e52;
+            color: #0d5e52;
+        }
+
+        .faq-mini {
+            background: white;
+            border-radius: 24px;
+            padding: 1.6rem 1.8rem;
+            margin: 2rem 0 1.8rem;
+            border: 1px solid #cae3df;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.8rem;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            color: #1d4b50;
+            cursor: pointer;
+            padding: 0.3rem 0;
+        }
+
+        .faq-mini summary::marker {
+            color: #3ab3a4;
+        }
+
+        .faq-mini .answer {
+            padding: 0.5rem 0 0.2rem 1.2rem;
+            color: #2c4e56;
+            border-left: 3px solid #b0ddd6;
+        }
+
+        /* 页尾访问提示 */
+        .footer-note {
+            margin-top: 2.8rem;
+            padding-top: 1.6rem;
+            border-top: 2px dashed #b7d9d4;
+            text-align: center;
+            color: #2b5a61;
+            font-size: 0.95rem;
+        }
+
+        .footer-note .tagline {
+            background: #e6f3f1;
+            display: inline-block;
+            padding: 0.4rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            margin-bottom: 0.4rem;
+            color: #0d4d44;
+        }
+
+        .footer-note small {
+            display: block;
+            margin-top: 0.6rem;
+            color: #57828b;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            .hero {
+                padding: 2.2rem 1.5rem;
+                border-radius: 24px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .grid-cards {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .story-paragraph {
+                padding: 1.2rem;
+            }
+
+            .link-sentence {
+                padding: 1rem 1.2rem;
+            }
+
+            .faq-mini {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .hero .sub {
+                font-size: 0.95rem;
+            }
+
+            .page {
+                padding: 0.8rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 首页横幅 hero -->
+        <div class="hero">
+            <h1>爱游戏 · 信息与指引</h1>
+            <div class="sub">一个聚合多元场景、保持稳定访问路径的内容平台，持续为用户提供清晰的入口与说明。</div>
+        </div>
+
+        <!-- 背景说明 + 三段自然介绍 -->
+        <div class="intro-block">
+            <h2>从定位到日常</h2>
+            <div class="lead">平台围绕信息整合与访问连贯性展开，兼顾不同使用习惯。</div>
+
+            <div class="grid-cards">
+                <div class="card">
+                    <div class="emoji-icon">🔹</div>
+                    <h3>场景适配</h3>
+                    <p>无论是桌面端还是移动设备，页面布局与导航均经过重新梳理，减少不必要的跳转层级。日常浏览与专题查阅都能快速定位。</p>
+                    <div class="badge">稳定入口</div>
+                </div>
+                <div class="card">
+                    <div class="emoji-icon">📋</div>
+                    <h3>内容结构</h3>
+                    <p>每个栏目基于用户反馈与使用数据持续迭代。介绍页、分类索引、辅助说明均有独立模块，避免信息过载。</p>
+                    <div class="badge">知识型整理</div>
+                </div>
+                <div class="card">
+                    <div class="emoji-icon">🧩</div>
+                    <h3>交互提示</h3>
+                    <p>关键操作区域配有引导标识，同时保留简洁的视觉风格。用户可依据自身节奏浏览，无需反复查找。</p>
+                    <div class="badge">友好节奏</div>
+                </div>
+            </div>
+
+            <!-- 背景说明段落 (第一段) -->
+            <div class="story-paragraph">
+                <p><strong>为什么需要清晰的入口说明？</strong> 信息型平台的价值不仅在于资源本身，更在于用户能否顺畅地找到所需。从浏览器书签到直接搜索，一个稳定的访问路径能减少认知负担。<a href="https://ayx-china-sports.com" style="color:#127a6b; text-decoration: underline; text-underline-offset:3px;">爱游戏</a> 在设计之初就将“可访问性”纳入基础框架，所有页面围绕此目标展开。</p>
+            </div>
+
+            <!-- 第二段自然介绍 -->
+            <div class="story-paragraph">
+                <p>平台采用模块化布局，首页、分类页与详情页各自承担明确职能。用户不必记忆复杂路径，通过顶部导航与侧边索引即可切换场景。同时，每个页面都包含指向主要区域的回访链接，确保在深度浏览时也能快速回到起点。</p>
+                <p>这种结构也适用于不同网络环境。经过轻量化调整后，页面加载时间得到优化，图片与样式按需加载，进一步提升了移动端的使用体验。</p>
+            </div>
+
+            <!-- 第三段自然介绍 + 嵌入链接 -->
+            <div class="link-sentence">
+                <p>对于新用户而言，了解平台的第一步往往是从阅读介绍开始。我们建议从首页概览入手，逐步熟悉内容分类与更新规律。如果你正在寻找一个可靠的访问起点，可以直接通过 <a href="https://ayx-china-sports.com">爱游戏</a> 进入主站，那里有更完整的导航与最新动态。</p>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要 / 常见问题摘录 -->
+        <div class="faq-mini">
+            <details>
+                <summary>爱游戏主要提供哪些方面的内容？</summary>
+                <div class="answer">平台聚焦于信息整合与访问引导，涵盖多个兴趣领域。每个分类都配有简要说明，帮助用户快速判断是否匹配自身需求。</div>
+            </details>
+            <details>
+                <summary>移动端访问是否顺畅？</summary>
+                <div class="answer">页面采用了响应式布局，在手机与平板设备上均可自适应。按钮尺寸、间距与字体均针对触控操作进行过调整，日常使用体验流畅。</div>
+            </details>
+            <details>
+                <summary>如何保持访问路径稳定？</summary>
+                <div class="answer">除了直接输入域名，你也可以将主站添加至浏览器收藏夹。平台长期维护同一入口，不随意变更核心地址，方便用户记忆与分享。</div>
+            </details>
+        </div>
+
+        <!-- 页尾访问提示 -->
+        <div class="footer-note">
+            <div class="tagline">✦ 保持连接 · 稳定入口 ✦</div>
+            如需回顾平台介绍或跳转至主界面，可随时使用上方链接或浏览器书签。
+            <small>本页面为介绍与说明用途 · 内容定期更新</small>
+        </div>
+    </div>
+</body>
+</html>
